@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - LitMuse</title>
+</head>
+<body>
+
+    <h1>Login to LitMuse</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+</body>
+</html>
