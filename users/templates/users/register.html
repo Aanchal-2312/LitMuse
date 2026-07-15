@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register - LitMuse</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>Create your LitMuse account</h1>
+{% block content %}
 
-    <form method="POST">
+<h1>Create your LitMuse account</h1>
 
-        {% csrf_token %}
+<form method="POST">
 
-        {{ form.as_p }}
+    {% csrf_token %}
 
-        <button type="submit">
-            Register
-        </button>
+    {{ form.as_p }}
 
-    </form>
+    <button type="submit">
+        Register
+    </button>
 
-</body>
-</html>
+</form>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Remove Book</h1>
+
+<p>
+    Are you sure you want to remove
+    <strong>{{ entry.book.title }}</strong>
+    from your library?
+</p>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <button type="submit">
+        Yes, Remove
+    </button>
+
+</form>
+
+<p>
+
+    <a href="{% url 'library' %}">
+        Cancel
+    </a>
+
+</p>
+
+{% endblock %}
