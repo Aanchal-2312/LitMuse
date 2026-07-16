@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Discover Books</h1>
+
+<form method="GET">
+
+    <input
+        type="text"
+        name="q"
+        value="{{ request.GET.q }}"
+        placeholder="Search books..."
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+<hr>
+
+{% if request.GET.q %}
+
+    <h2>
+        Search Results for "{{ request.GET.q }}"
+    </h2>
+
+    {% for book in books %}
+
+        <div class="book-card">
+
+            <a href="{% url 'google_book_detail' book.id %}">
+
+                {% if book.volumeInfo.imageLinks.thumbnail %}
+
+                    <img
+                        src="{{ book.volumeInfo.imageLinks.thumbnail }}"
+                        alt="{{ book.volumeInfo.title }}"
+                        width="128"
+                    >
+
+                {% endif %}
+
+                <h3>{{ book.volumeInfo.title }}</h3>
+
+            </a>
+
+            <p>
+
+                <strong>Author:</strong>
+
+                {% if book.volumeInfo.authors %}
+
+                    {{ book.volumeInfo.authors|join:", " }}
+
+                {% else %}
+
+                    Unknown Author
+
+                {% endif %}
+
+            </p>
+
+            {% if book.volumeInfo.categories %}
+
+                <p>
+
+                    <strong>Categories:</strong>
+
+                    {{ book.volumeInfo.categories|join:", " }}
+
+                </p>
+
+            {% endif %}
+
+            {% if book.volumeInfo.publishedDate %}
+
+                <p>
+
+                    <strong>Published:</strong>
+
+                    {{ book.volumeInfo.publishedDate }}
+
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <hr>
+
+    {% empty %}
+
+        <p>No books found.</p>
+
+    {% endfor %}
+
+{% endif %}
+
+{% endblock %}

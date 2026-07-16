@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section>
+
+    {% if book.imageLinks.thumbnail %}
+
+        <img
+            src="{{ book.imageLinks.thumbnail }}"
+            alt="{{ book.title }}"
+            width="220"
+        >
+
+    {% endif %}
+
+    <h1>{{ book.title }}</h1>
+
+    {% if book.subtitle %}
+
+        <h3>{{ book.subtitle }}</h3>
+
+    {% endif %}
+
+    <p>
+
+        <strong>Author:</strong>
+
+        {% if book.authors %}
+
+            {{ book.authors|join:", " }}
+
+        {% else %}
+
+            Unknown Author
+
+        {% endif %}
+
+    </p>
+
+    {% if book.averageRating %}
+
+        <p>
+
+            ⭐ {{ book.averageRating }}
+
+            ({{ book.ratingsCount }} Google ratings)
+
+        </p>
+
+    {% endif %}
+
+    {% if book.categories %}
+
+        <p>
+
+            <strong>Categories:</strong>
+
+            {{ book.categories|join:" • " }}
+
+        </p>
+
+    {% endif %}
+
+</section>
+
+<hr>
+
+<section>
+
+    <h2>Book Information</h2>
+
+    {% if book.publisher %}
+
+        <p>
+
+            <strong>Publisher:</strong>
+
+            {{ book.publisher }}
+
+        </p>
+
+    {% endif %}
+
+    {% if book.publishedDate %}
+
+        <p>
+
+            <strong>Published:</strong>
+
+            {{ book.publishedDate }}
+
+        </p>
+
+    {% endif %}
+
+    {% if book.pageCount %}
+
+        <p>
+
+            <strong>Pages:</strong>
+
+            {{ book.pageCount }}
+
+        </p>
+
+    {% endif %}
+
+    {% if book.language_name %}
+
+        <p>
+
+            <strong>Language:</strong>
+
+            {{ book.language_name }}
+
+        </p>
+
+    {% endif %}
+
+    {% if book.industryIdentifiers %}
+
+        <h3>ISBN</h3>
+
+        <ul>
+
+            {% for isbn in book.industryIdentifiers %}
+
+                <li>
+
+                    <strong>{{ isbn.type }}</strong>
+
+                    :
+
+                    {{ isbn.identifier }}
+
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% endif %}
+
+</section>
+
+<hr>
+
+<section>
+
+    <h2>Description</h2>
+
+    {% if book.description %}
+
+        <p>
+
+            {{ book.description|safe }}
+
+        </p>
+
+    {% else %}
+
+        <p>
+
+            No description available.
+
+        </p>
+
+    {% endif %}
+
+</section>
+
+<hr>
+
+<section>
+
+    <h2>Explore</h2>
+
+    {% if book.previewLink %}
+
+        <p>
+
+            <a href="{{ book.previewLink }}" target="_blank">
+
+                📖 Read Free Preview
+
+            </a>
+
+        </p>
+
+    {% endif %}
+
+    {% if book.infoLink %}
+
+        <p>
+
+            <a href="{{ book.infoLink }}" target="_blank">
+
+                🌐 View on Google Books
+
+            </a>
+
+        </p>
+
+    {% endif %}
+
+</section>
+
+<hr>
+
+<section>
+
+    <h2>Want to read this book?</h2>
+
+    <p>
+
+        Add it to your LitMuse library and start tracking your reading journey.
+
+    </p>
+
+    <button>
+
+        Add to Library
+
+    </button>
+
+</section>
+
+{% endblock %}

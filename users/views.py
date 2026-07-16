@@ -1,3 +1,5 @@
+import requests
+from django.conf import settings
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -201,3 +203,79 @@ def delete_library_entry(request, pk):
             "entry": entry,
         },
     )
+
+@login_required
+def search_books(request):
+
+    books = []
+
+    query = request.GET.get("q")
+
+    if query:
+
+        response = requests.get(
+            "https://www.googleapis.com/books/v1/volumes",
+            params={
+                "q": query,
+                "key": settings.GOOGLE_BOOKS_API_KEY,
+                "maxResults": 20,
+            },
+        )
+
+        data = response.json()
+
+        books = data.get("items", [])
+
+    return render(
+        request,
+        "users/discover_books.html",
+        {
+            "books": books,
+        },
+    )
+
+
+@login_required
+def google_book_detail(request, google_books_id):
+
+    response = requests.get(
+        f"https://www.googleapis.com/books/v1/volumes/{google_books_id}",
+        params={
+            "key": settings.GOOGLE_BOOKS_API_KEY,
+        },
+    )
+
+    data = response.json()
+
+    volume = data.get("volumeInfo", {})
+    LANGUAGES = {
+        "en": "English",
+        "fr": "French",
+        "es": "Spanish",
+        "de": "German",
+        "it": "Italian",
+        "hi": "Hindi",
+        "ja": "Japanese",
+        "ko": "Korean",
+        "zh": "Chinese",
+    }
+
+    volume["language_name"] = LANGUAGES.get(
+        volume.get("language"),
+        volume.get("language"),
+    )
+
+
+    return render(
+        request,
+        "users/google_book_detail.html",
+        {
+            "book": volume,
+            "google_books_id": google_books_id,
+        },
+    )
+
+
+@login_required
+def import_book(request, google_books_id):
+    return HttpResponse("Coming tomorrow!")

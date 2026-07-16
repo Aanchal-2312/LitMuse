@@ -17,4 +17,14 @@ urlpatterns = [
     views.delete_library_entry,
     name="delete_library_entry",
     ),
+    path(
+        "discover/", 
+         views.search_books, 
+         name="search_books"
+         ),
+    path(
+            "google-book/<str:google_books_id>/",
+            views.google_book_detail,
+            name="google_book_detail",
+        ),
 ]
