@@ -218,12 +218,18 @@
 
     </p>
 
-    <button>
-
-        Add to Library
-
-    </button>
-
+    {% if in_library %}
+        <button disabled>
+            ✓ In Your Library
+        </button>
+    {% else %}
+        <form method="post" action="{% url 'import_book' google_books_id %}">
+            {% csrf_token %}
+            <button type="submit">
+                Add to Library
+            </button>
+        </form>
+    {% endif %}
 </section>
 
 {% endblock %}

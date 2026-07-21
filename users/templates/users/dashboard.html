@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard | LitMuse
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-hero">
+
+    <h1>Welcome back, {{ user.first_name|default:user.username }}.</h1>
+
+    <p>
+        Your reading journey continues here.
+    </p>
+
+</section>
+
+{% endblock %}

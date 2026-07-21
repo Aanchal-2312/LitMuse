@@ -73,6 +73,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
+
+LOGIN_REDIRECT_URL = "dashboard"
+
+
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
@@ -120,5 +124,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 GOOGLE_BOOKS_API_KEY = os.getenv('GOOGLE_BOOKS_API_KEY')

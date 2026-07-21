@@ -1,13 +1,22 @@
-import requests
-from django.conf import settings
 from django.http import HttpResponse
 from django.contrib import messages
+from django.utils.text import slugify
+from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
-from accounts.models import LibraryEntry, Book
+from accounts.models import Genre, LibraryEntry, Book, Author
 from users.forms import AddBookForm, LibraryEntryForm
+from .services import (search_google_books, get_google_book,)
+
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def dashboard(request):
+    return render(request, "users/dashboard.html")
+
 
 
 def register(request):
@@ -212,19 +221,7 @@ def search_books(request):
     query = request.GET.get("q")
 
     if query:
-
-        response = requests.get(
-            "https://www.googleapis.com/books/v1/volumes",
-            params={
-                "q": query,
-                "key": settings.GOOGLE_BOOKS_API_KEY,
-                "maxResults": 20,
-            },
-        )
-
-        data = response.json()
-
-        books = data.get("items", [])
+        books = search_google_books(query)
 
     return render(
         request,
@@ -238,44 +235,117 @@ def search_books(request):
 @login_required
 def google_book_detail(request, google_books_id):
 
-    response = requests.get(
-        f"https://www.googleapis.com/books/v1/volumes/{google_books_id}",
-        params={
-            "key": settings.GOOGLE_BOOKS_API_KEY,
-        },
-    )
+    book = get_google_book(google_books_id)
 
-    data = response.json()
-
-    volume = data.get("volumeInfo", {})
-    LANGUAGES = {
-        "en": "English",
-        "fr": "French",
-        "es": "Spanish",
-        "de": "German",
-        "it": "Italian",
-        "hi": "Hindi",
-        "ja": "Japanese",
-        "ko": "Korean",
-        "zh": "Chinese",
-    }
-
-    volume["language_name"] = LANGUAGES.get(
-        volume.get("language"),
-        volume.get("language"),
-    )
-
+    in_library = LibraryEntry.objects.filter(
+    user=request.user,
+    book__google_books_id=google_books_id,
+).exists()
 
     return render(
         request,
         "users/google_book_detail.html",
         {
-            "book": volume,
+            "book": book,
             "google_books_id": google_books_id,
+            "in_library": in_library,
         },
     )
 
 
 @login_required
+@require_POST
+
 def import_book(request, google_books_id):
-    return HttpResponse("Coming tomorrow!")
+    book_data = get_google_book(google_books_id)
+
+    author_names = book_data.get("authors", [])
+
+    authors = []
+
+    for author_name in author_names:
+        author, created = Author.objects.get_or_create(
+            name=author_name,
+        )
+        authors.append(author)
+
+    published_year = None
+
+    published_date = book_data.get("publishedDate")
+
+    if published_date:
+        try:
+            published_year = int(book_data["publishedDate"][:4])
+        except ValueError:
+            pass
+
+
+
+    isbn_10 = ""
+    isbn_13 = ""
+
+    industry_identifiers = book_data.get(
+        "industryIdentifiers",
+        [],
+    )
+
+    for identifier in industry_identifiers:
+
+        if identifier.get("type") == "ISBN_10":
+            isbn_10 = identifier.get("identifier", "")
+
+        elif identifier.get("type") == "ISBN_13":
+            isbn_13 = identifier.get("identifier", "")
+
+
+
+    category_names = book_data.get("categories", [])
+
+    genres = []
+
+    for category_name in category_names:
+        genre, created = Genre.objects.get_or_create(
+            name=category_name,
+            defaults={
+                "slug": slugify(category_name),
+            },
+        )
+        genres.append(genre)
+
+    
+
+
+
+    book, created = Book.objects.get_or_create(
+        google_books_id=google_books_id,
+        defaults={
+            "title": book_data.get("title", ""),
+            "isbn_10": isbn_10,
+            "isbn_13": isbn_13,
+            "published_year": published_year,
+            "publisher": book_data.get("publisher", ""),
+            "language": book_data.get("language", ""),
+            "pages": book_data.get("pageCount"),
+            "description": book_data.get("description", ""),
+            "cover_url": book_data.get("imageLinks", {}).get("thumbnail", ""),
+            "average_rating": book_data.get("averageRating"),
+            "ratings_count": book_data.get("ratingsCount", 0),
+        },
+    )
+
+    book.authors.set(authors)
+    book.genres.set(genres)
+    library_entry, created = LibraryEntry.objects.get_or_create(
+        user=request.user,
+        book=book,
+    )
+
+    if created:
+        messages.success(request, "Book added to your library!")
+    else:
+        messages.info(request, "Book is already in your library.")
+        
+    return redirect(
+        "google_book_detail",
+        google_books_id=google_books_id,
+    )

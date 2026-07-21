@@ -19,15 +19,19 @@ class GenreAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     list_display = (
         'title', 
-        'author', 
+        'display_authors', 
         'published_year',
         'pages',
         'average_rating'
     )
 
+    @admin.display(description='Authors')
+    def display_authors(self, obj):
+        return ", ".join(author.name for author in obj.authors.all())
+
     search_fields = (
         'title', 
-        'author__name', 
+        'authors__name', 
         )
     
     list_filter = (

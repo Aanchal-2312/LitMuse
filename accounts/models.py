@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+
 class Author(models.Model):
     name = models.CharField(max_length=255)
     bio = models.TextField(blank=True)
@@ -27,9 +29,9 @@ class Genre(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=255)
 
-    author = models.ForeignKey(
+    authors = models.ManyToManyField(
         Author, 
-        on_delete=models.CASCADE, 
+        
         related_name='books'
     )
 

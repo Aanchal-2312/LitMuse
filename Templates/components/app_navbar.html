@@ -1,0 +1,41 @@
+<nav class="app-navbar">
+
+    <div class="nav-container">
+
+        <a href="{% url 'dashboard' %}" class="logo">
+            <span class="logo-lit">Lit</span><span class="logo-muse">Muse</span>
+        </a>
+
+        <ul class="nav-menu">
+
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'library' %}">
+                    Library
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'search_books' %}">
+                    Discover
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="nav-actions">
+
+            <a href="{% url 'logout' %}" class="username">
+                    👤 {{ user.first_name|default:user.username }}
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>

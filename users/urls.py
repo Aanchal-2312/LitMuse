@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("dashboard/", views.dashboard, name="dashboard"),
     path("register/", views.register, name="register"),
     path("login/", views.login_view, name="login"),
     path("logout/", views.logout_view, name="logout"),
@@ -26,5 +27,10 @@ urlpatterns = [
             "google-book/<str:google_books_id>/",
             views.google_book_detail,
             name="google_book_detail",
+        ),
+    path(
+            "import-book/<str:google_books_id>/",
+            views.import_book,
+            name="import_book",
         ),
 ]
