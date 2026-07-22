@@ -1,41 +1,48 @@
-<nav class="app-navbar">
+<header class="app-navbar">
+  <div class="app-navbar-container">
+    <!-- Logo -->
 
-    <div class="nav-container">
+    <a href="{% url 'users:dashboard' %}" class="app-logo">
+      <span class="app-logo-light"><img src="/static/images/logo-light.png" alt=" "></span>
+      <span class="app-logo-dark">Lit</span>
+      <span class="app-logo-purple">Muse</span>
+    </a>
+    <!-- Navigation -->
 
-        <a href="{% url 'dashboard' %}" class="logo">
-            <span class="logo-lit">Lit</span><span class="logo-muse">Muse</span>
-        </a>
+    <nav class="app-navbar-links">
+      <a
+        href="{% url 'users:dashboard' %}"
+        class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+      >
+        Dashboard
+      </a>
 
-        <ul class="nav-menu">
+      <a
+        href="{% url 'users:library' %}"
+        class="{% if request.resolver_match.url_name == 'library' %}active{% endif %}"
+      >
+        Library
+      </a>
 
-            <li>
-                <a href="{% url 'dashboard' %}">
-                    Dashboard
-                </a>
-            </li>
+      <a
+        href="{% url 'users:search_books' %}"
+        class="{% if request.resolver_match.url_name == 'search_books' %}active{% endif %}"
+      >
+        Discover
+      </a>
+    </nav>
 
-            <li>
-                <a href="{% url 'library' %}">
-                    Library
-                </a>
-            </li>
+    <!-- User -->
 
-            <li>
-                <a href="{% url 'search_books' %}">
-                    Discover
-                </a>
-            </li>
+    <div class="app-navbar-user">
+      <a href="{% url 'users:logout' %}" class="app-logout">
+        
+        <div class="app-user-avatar">{{ user.username|first|upper }}</div>
+      </a>
 
-        </ul>
+      <span class="app-username"> {{ user.username }} </span>
 
-        <div class="nav-actions">
-
-            <a href="{% url 'logout' %}" class="username">
-                    👤 {{ user.first_name|default:user.username }}
-            </a>
-
-        </div>
-
+      <i class="fa-solid fa-chevron-down"></i>
     </div>
-
-</nav>
+  </div>
+</header>

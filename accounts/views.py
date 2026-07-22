@@ -3,6 +3,6 @@ from django.shortcuts import render, redirect
 def home(request):
 
     if request.user.is_authenticated:
-        return redirect("dashboard")
+        return redirect("users:dashboard")
 
     return render(request, "accounts/home.html")

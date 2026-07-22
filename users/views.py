@@ -30,7 +30,7 @@ def register(request):
             login(request, user)
             messages.success(request, 
                 "Your account has been created successfully.")
-            return redirect("home")
+            return redirect("users:dashboard")
 
     else:
         form = UserCreationForm()
@@ -54,10 +54,10 @@ def login_view(request):
             login(request, user)
 
             messages.success(request, 
-                             f"Welcome back, {user.username}!"
+                             "Happy reading!"
                              )
 
-            return redirect("home")
+            return redirect("users:dashboard")
 
     else:
 
@@ -122,7 +122,7 @@ def add_book(request):
                     "This book is already in your library.",
                 )
 
-                return redirect("library")
+                return redirect("users:library")
 
             LibraryEntry.objects.create(
                 user=request.user,
@@ -134,7 +134,7 @@ def add_book(request):
                 f'"{book.title}" added to your library.',
             )
 
-            return redirect("library")
+            return redirect("users:library")
 
     else:
 
@@ -171,7 +171,7 @@ def update_library_entry(request, pk):
             messages.success(request,
                 "Library entry updated successfully."  )
 
-            return redirect("library")
+            return redirect("users:library")
 
     else:
 
@@ -203,7 +203,7 @@ def delete_library_entry(request, pk):
             f"{entry.book.title} removed from your library."
         )
 
-        return redirect("library")
+        return redirect("users:library")
 
     return render(
         request,
@@ -346,6 +346,6 @@ def import_book(request, google_books_id):
         messages.info(request, "Book is already in your library.")
         
     return redirect(
-        "google_book_detail",
+        "users:google_book_detail",
         google_books_id=google_books_id,
     )

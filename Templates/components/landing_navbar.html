@@ -1,12 +1,12 @@
 <nav class="landing-navbar">
 
-    <div class="nav-container">
+    <div class="landing-nav-container">
 
         <a href="{% url 'home' %}" class="logo">
             <span class="logo-lit">Lit</span><span class="logo-muse">Muse</span>
         </a>
 
-        <ul class="nav-menu">
+        <ul class="landing-nav-menu">
 
             <li>
                 <a href="#features">Features</a>
@@ -18,13 +18,13 @@
 
         </ul>
 
-        <div class="nav-actions">
+        <div class="landing-nav-actions">
 
-            <a href="{% url 'login' %}" class="login-link">
+            <a href="{% url 'users:login' %}" class="login-link">
                 Login
             </a>
 
-            <a href="{% url 'register' %}" class="btn-primary">
+            <a href="{% url 'users:register' %}" class="btn-primary">
                 Start Reading
             </a>
 

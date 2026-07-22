@@ -1,8 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}
-LitMuse | Your Personal Reading Companion
+{% block title %}LitMuse{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
 {% endblock %}
+
+
 
 {% block content %}
 
@@ -24,7 +29,7 @@ LitMuse | Your Personal Reading Companion
 
         <div class="hero-buttons">
 
-            <a href="{% url 'register' %}" class="btn-primary">
+            <a href="{% url 'users:register' %}" class="btn-primary">
                 Start Reading
             </a>
 
@@ -157,7 +162,7 @@ LitMuse | Your Personal Reading Companion
         Join LitMuse and build your personal digital bookshelf today.
     </p>
 
-    <a href="{% url 'register' %}" class="btn-primary">
+    <a href="{% url 'users:register' %}" class="btn-primary">
 
         Start Reading
 

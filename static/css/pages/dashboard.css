@@ -1,0 +1,1019 @@
+/* ===========================
+   DASHBOARD
+=========================== */
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+}
+
+.dashboard-right{
+
+    position:sticky;
+
+    top:100px;
+
+    align-self:start;
+
+}
+
+/* ===========================
+   GREETING
+=========================== */
+
+.dashboard-greeting {
+    margin-bottom: 2rem;
+}
+
+.dashboard-greeting h1 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: .35rem;
+}
+
+.dashboard-greeting p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* ===========================
+   MAIN GRID
+=========================== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* ===========================
+   LEFT & RIGHT COLUMNS
+=========================== */
+
+.dashboard-left,
+.dashboard-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ===========================
+   REUSABLE CARD
+=========================== */
+
+.dashboard-card {
+    background: var(--surface);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 1.75rem;
+    transition: all .25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.08);
+}
+
+/* ===========================
+   SECTION TITLES
+=========================== */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.section-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.section-header a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    transition: .2s;
+}
+
+.section-header a:hover {
+    opacity: .8;
+}
+
+/* ===========================
+   HERO CARD
+=========================== */
+
+.hero-card {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-label {
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.quote {
+    font-size: 2rem;
+    line-height: 1.45;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.75rem;
+}
+
+.quote-book {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.quote-author {
+    margin-top: .35rem;
+    color: var(--text-secondary);
+}
+
+
+.quote-actions{
+
+    display:flex;
+
+    gap:.75rem;
+
+    margin-top:2rem;
+
+}
+
+.quote-actions button{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    border:none;
+
+    background:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    color:var(--text-secondary);
+
+    transition:.25s;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+
+}
+
+.quote-actions button:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+    transform:translateY(-2px);
+
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 260px;
+}
+
+/* ===========================
+   READING SNAPSHOT
+=========================== */
+
+.snapshot-card h2{
+    margin-bottom:1.5rem;
+}
+
+.snapshot-circle{
+
+    width:180px;
+    height:180px;
+
+    margin:0 auto 2rem;
+
+    border-radius:50%;
+
+    border:12px solid var(--primary);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:white;
+
+    box-shadow:0 12px 25px rgba(0,0,0,.05);
+
+}
+
+.snapshot-circle h3{
+
+    font-size:2.4rem;
+
+    margin:0;
+
+}
+
+.snapshot-circle span{
+
+    color:var(--text-secondary);
+
+    margin-top:.3rem;
+
+}
+
+.snapshot-stats{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:1rem;
+
+}
+
+.snapshot-stat{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding-bottom:.75rem;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.snapshot-stat:last-child{
+
+    border-bottom:none;
+
+}
+
+.snapshot-stat p{
+
+    color:var(--text-secondary);
+
+}
+
+.snapshot-stat strong{
+
+    font-size:1.15rem;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 992px){
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-card{
+        grid-template-columns:1fr;
+    }
+
+    .hero-image{
+        order:-1;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .dashboard-container{
+        padding:2rem 1rem;
+    }
+
+    .dashboard-greeting h1{
+        font-size:2rem;
+    }
+
+    .quote{
+        font-size:1.5rem;
+    }
+
+    .quote-actions{
+        flex-wrap:wrap;
+        gap:1rem;
+    }
+
+}
+
+/* ==========================================
+   CONTINUE READING
+========================================== */
+
+.book-row {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: .5rem;
+    scroll-behavior: smooth;
+}
+
+.book-row::-webkit-scrollbar {
+    height: 8px;
+}
+
+.book-row::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+}
+
+.book-row::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.continue-card {
+
+    position: relative;
+
+    min-width: 225px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+
+    text-decoration: none;
+
+    color: inherit;
+}
+
+.continue-card:hover{
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 18px 35px rgba(0,0,0,.08);
+
+}
+
+.continue-cover{
+
+    position:relative;
+
+}
+
+.continue-cover img{
+
+    width:100%;
+
+    height:310px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+/* Three-dot menu */
+
+.book-menu{
+
+    position:absolute;
+
+    top:12px;
+
+    right:12px;
+
+    width:36px;
+
+    height:36px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.95);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    transition:.25s;
+
+}
+
+.continue-card:hover .book-menu{
+
+    opacity:1;
+
+}
+
+.book-menu:hover{
+
+    background:white;
+
+}
+
+/* Dropdown */
+
+.book-dropdown{
+
+    position:absolute;
+
+    top:55px;
+
+    right:12px;
+
+    width:220px;
+
+    background:white;
+
+    border-radius:14px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+
+    border:1px solid var(--border);
+
+    display:none;
+
+    z-index:10;
+
+}
+
+.book-dropdown a{
+
+    display:block;
+
+    padding:14px 18px;
+
+    text-decoration:none;
+
+    color:var(--text-primary);
+
+    transition:.2s;
+
+}
+
+.book-dropdown a:hover{
+
+    background:#f7f7fb;
+
+}
+
+.book-menu.open + .book-dropdown{
+
+    display:block;
+
+}
+
+/* Book information */
+
+.continue-body{
+
+    padding:1rem;
+
+}
+
+.continue-title{
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    margin-bottom:.35rem;
+
+    line-height:1.3;
+
+}
+
+.continue-author{
+
+    color:var(--text-secondary);
+
+    font-size:.9rem;
+
+    margin-bottom:1rem;
+
+}
+
+.continue-chapter{
+
+    font-size:.9rem;
+
+    margin-bottom:.75rem;
+
+    color:var(--text-primary);
+
+}
+
+/* Progress */
+
+.progress{
+
+    width:100%;
+
+    height:8px;
+
+    background:#ececf3;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    margin-bottom:.45rem;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    background:var(--primary);
+
+    border-radius:999px;
+
+}
+
+.progress-label{
+
+    font-size:.85rem;
+
+    color:var(--text-secondary);
+
+}
+
+/* ==========================================
+   RECENTLY ADDED
+========================================== */
+
+.recent-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+
+    gap:1.5rem;
+
+}
+
+.recent-card{
+
+    text-decoration:none;
+
+    color:inherit;
+
+    transition:.25s;
+
+}
+
+.recent-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.recent-cover{
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    margin-bottom:.8rem;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.06);
+
+}
+
+.recent-cover img{
+
+    width:100%;
+
+    height:260px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+.recent-title{
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    line-height:1.4;
+
+}
+
+/* ==========================================
+   SHARED BOOK HOVER
+========================================== */
+
+.continue-card:hover img,
+
+.recent-card:hover img{
+
+    transform:scale(1.04);
+
+}
+
+.continue-cover img,
+
+.recent-cover img{
+
+    transition:.35s ease;
+
+}
+
+/* ==========================================
+   HERO CARD POLISH
+========================================== */
+
+.hero-card{
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #faf7ff
+    );
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.hero-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+
+    height:280px;
+
+    border-radius:50%;
+
+    background:rgba(91,92,226,.05);
+
+    right:-120px;
+
+    bottom:-120px;
+
+    pointer-events:none;
+
+}
+
+.hero-image{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/* ==========================================
+   READING ACTIVITY
+========================================== */
+
+.activity-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:1rem;
+
+}
+
+.activity-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:1rem;
+
+    padding-bottom:1rem;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.activity-item:last-child{
+
+    border-bottom:none;
+
+    padding-bottom:0;
+
+}
+
+.activity-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#f5f4ff;
+
+    color:var(--primary);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:1rem;
+
+    flex-shrink:0;
+
+}
+
+.activity-content{
+
+    flex:1;
+
+}
+
+.activity-content h4{
+
+    margin:0 0 .3rem;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    color:var(--text-primary);
+
+    line-height:1.4;
+
+}
+
+.activity-content span{
+
+    color:var(--text-secondary);
+
+    font-size:.85rem;
+
+}
+
+/* ==========================================
+   EMPTY STATES
+========================================== */
+
+.empty-state{
+
+    text-align:center;
+
+    padding:3rem 1rem;
+
+}
+
+.empty-state img{
+
+    width:120px;
+
+    margin-bottom:1rem;
+
+    opacity:.8;
+
+}
+
+.empty-state h3{
+
+    margin-bottom:.6rem;
+
+    color:var(--text-primary);
+
+}
+
+.empty-state p{
+
+    color:var(--text-secondary);
+
+    max-width:280px;
+
+    margin:0 auto;
+
+    line-height:1.6;
+
+}
+
+/* ==========================================
+   BUTTONS INSIDE CARDS
+========================================== */
+
+.card-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:.5rem;
+
+    padding:.75rem 1.2rem;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    transition:.25s;
+
+}
+
+.card-button:hover{
+
+    background:var(--primary-dark);
+
+}
+
+/* ==========================================
+   SMALL UTILITIES
+========================================== */
+
+.mb-1{margin-bottom:.5rem;}
+.mb-2{margin-bottom:1rem;}
+.mb-3{margin-bottom:1.5rem;}
+.mt-2{margin-top:1rem;}
+.mt-3{margin-top:1.5rem;}
+
+.text-muted{
+    color:var(--text-secondary);
+}
+
+.text-center{
+    text-align:center;
+}
+
+/* ==========================================
+   SMOOTH TRANSITIONS
+========================================== */
+
+.dashboard-card,
+.continue-card,
+.recent-card,
+.book-menu,
+.quote-actions button{
+
+    transition:all .25s ease;
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:768px){
+
+    .book-row{
+
+        gap:1rem;
+
+    }
+
+    .continue-card{
+
+        min-width:180px;
+
+    }
+
+    .continue-cover img{
+
+        height:240px;
+
+    }
+
+    .recent-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .snapshot-circle{
+
+        width:145px;
+        height:145px;
+
+    }
+
+}
+
+@media (max-width:600px){
+
+    .dashboard-container{
+
+        padding:1.5rem 1rem 3rem;
+
+    }
+
+    .dashboard-card{
+
+        padding:1.25rem;
+
+    }
+
+    .dashboard-greeting h1{
+
+        font-size:1.8rem;
+
+    }
+
+    .section-header h2{
+
+        font-size:1.15rem;
+
+    }
+
+    .quote{
+
+        font-size:1.3rem;
+
+    }
+
+    .hero-image{
+
+        display:none;
+
+    }
+
+    .snapshot-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .recent-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:1rem;
+
+    }
+
+}

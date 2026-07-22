@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% block content %}
 
 <h1>My Library</h1>
 
@@ -8,8 +10,8 @@
   <li>
     {{ entry.book.title }} - {{ entry.get_status_display }}
 
-    <a href="{% url 'update_library_entry' entry.pk %}"> Update </a>
-    <a href="{% url 'delete_library_entry' entry.pk %}"> Remove </a>
+    <a href="{% url 'users:update_library_entry' entry.pk %}"> Update </a>
+    <a href="{% url 'users:delete_library_entry' entry.pk %}"> Remove </a>
   </li>
 
   {% empty %}
